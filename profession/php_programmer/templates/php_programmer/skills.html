@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навыки</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css'%}" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+</head>
+<body>
+    <header class="header header_museum">
+        <span class="header_title">WEB-приложение на Django</span>
+        <ul class="left-list list list-reset">
+            <li class="list_item"><a href="/programmer/">Главная страница</a></li>
+            <li class="list_item"><a href="../demand/">Востребованность</a></li>
+            <li class="list_item"><a href="../geography/">География</a></li>
+            <li class="list_item"><a href="../skills/">Навыки</a></li>
+            <li class="list_item"><a href="../latest_vacancies/">Последние вакансии</a></li>
+        </ul>
+    </header>
+    <main class="main">
+        <section id="dynamics" class="dynamics">
+            <div class="container dynamics_container">
+                <h2 class="title table_title">Навыки</h2>
+                <form action=" " method="post" class="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" value="1" name="data_analysis" class="btn btn_pink">Преобработка данных</button>
+                </form>
+                {% for d in data %}
+                <div class="dynamics_content" style="display: flex;">
+                    <div class="dynamics_left" style="margin-right: 80px;">
+                        <h3>Таблица "ТОП-10 навыков за {{ d.0 }} год"</h3>
+                        <table class="dynamics__table">
+                            <tr class="dynamics__table_tr">
+                                <th class="dynamics__table_th">Навык</th>
+                                <th class="dynamics__table_th">Частота</th>
+<!--                                <th class="dynamics__table_th">Действия</th>-->
+                            </tr>
+                            {% for t in d.1 %}
+                            <tr class="dynamics__table_tr">
+                                <td class="dynamics__table_td">{{ t.0 }}</td>
+                                <td class="dynamics__table_td">{{ t.1 }}</td>
+<!--                                <td class="dynamics__table_td">-->
+<!--                                    <form method="post">-->
+<!--                                        {% csrf_token %}-->
+<!--                                        <button type="submit" name="del_{{author.id}}" value="1" class="btn btn_create">Delete</button>-->
+<!--                                    </form>-->
+<!--                                </td>-->
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="dynamics_graph">
+                        <h3>График "ТОП-10 навыков за {{ d.0 }} год"</h3>
+                        <img src='{% static d.2 %}' alt="данные для граыика отсутствуют">
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span class="footer_name">Майданский Александр Аркадьевич</span>
+        <span class="footer_group">РИ-210950</span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

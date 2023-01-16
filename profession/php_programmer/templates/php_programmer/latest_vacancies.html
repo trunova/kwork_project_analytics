@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Последние вакансии</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+</head>
+<body>
+    <header class="header header_museum">
+        <span class="header_title">WEB-приложение на Django</span>
+        <ul class="left-list list list-reset">
+            <li class="list_item"><a href="/programmer/">Главная страница</a></li>
+            <li class="list_item"><a href="../demand/">Востребованность</a></li>
+            <li class="list_item"><a href="../geography/">География</a></li>
+            <li class="list_item"><a href="../skills/">Навыки</a></li>
+            <li class="list_item"><a href="../latest_vacancies/">Последние вакансии</a></li>
+        </ul>
+    </header>
+    <main class="main">
+        <section id="dynamics" class="dynamics">
+            <div class="container dynamics_container">
+                <h2 class="title table_title">Последние вакансии</h2>
+                <h3>Список вакансий полученных с API HH за последний месяц:"</h3>
+                <table class="dynamics__table">
+                    <tr class="dynamics__table_tr">
+                        <th class="dynamics__table_th">Название вакансии</th>
+                        <th class="dynamics__table_th">Описание вакансии</th>
+                        <th class="dynamics__table_th">Навыки</th>
+                        <th class="dynamics__table_th">Компания</th>
+                        <th class="dynamics__table_th">Оклад от</th>
+                        <th class="dynamics__table_th">Оклад до</th>
+                        <th class="dynamics__table_th">Валюта оклада</th>
+                        <th class="dynamics__table_th">Название региона</th>
+                        <th class="dynamics__table_th">Дата публикации</th>
+                    </tr>
+                    {% for latest_vacancy in latest_vacancies %}
+                    <tr class="dynamics__table_tr">
+                        <td class="dynamics__table_td">{{ latest_vacancy.title }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.short_description }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.key_skills }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.company }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.salary_from }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.salary_to }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.salary_currency }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.region }}</td>
+                        <td class="dynamics__table_td">{{ latest_vacancy.published_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span class="footer_name">Майданский Александр Аркадьевич</span>
+        <span class="footer_group">РИ-210950</span>
+    </footer>
+</body>
+</html>
